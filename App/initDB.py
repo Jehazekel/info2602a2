@@ -1,4 +1,4 @@
-from main import db, app #, Pokemon
+from main import db, app #, Pokemon, MyPokemon
 import csv
 
 db.create_all(app=app)

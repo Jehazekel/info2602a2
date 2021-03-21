@@ -4,7 +4,7 @@ from flask_jwt import JWT, jwt_required, current_identity
 from sqlalchemy.exc import IntegrityError
 from datetime import timedelta 
 
-from models import db #, User, Pokemon, MyPokemon
+from models import db , User, Pokemon, MyPokemon
 
 ''' Begin boilerplate code '''
 def create_app():

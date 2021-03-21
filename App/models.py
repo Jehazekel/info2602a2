@@ -24,12 +24,12 @@ class User(db.Model):
     password= db.Column('password', db.String(80), nullable= False)
 ## must have set_password, check_password and to Dict
     def toDict(self):
-    return{
-        'id': self.id
-      'username':self.username,
-      'email':self.email,
-      'password': self.password
-    }
+        return{
+            'id': self.id,
+            'username':self.username,
+            'email':self.email,
+            'password': self.password
+        }
 
     def set_password(self, password):
         self.password= generate_password_hash(password, method='sha256')

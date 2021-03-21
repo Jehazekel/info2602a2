@@ -15,6 +15,25 @@ class MyPokemon(db.Model):
     }
 
 ## Create a User Model
+class User(db.Model):
+    id = db.Column('id',db.Integer, primary_key=True)
+    username = db.Column('username', db.String(50), unique=True, nullable=False )
+    email= db.Column('email',db.String(80), unique= True, nullable= False)
+    password= db.Column('password', db.String(80), nullable= False)
 ## must have set_password, check_password and to Dict
+    def toDict(self):
+    return{
+        'id': self.id
+      'username':self.username,
+      'email':self.email,
+      'password': self.password
+    }
 
+    def set_password(self, password):
+        self.password= generate_password_hash(password, method='sha256')
+
+    def check_password(self, password ):
+        return check_password_hash(self.password,password )
+
+    
 ## Create a Pokemon Model

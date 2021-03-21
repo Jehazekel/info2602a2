@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "init": "python3 ./App/initDB.py",
-    "start" :"python3 ./App/main.py",
+    "start": "python3 ./App/main.py",
     "app-test": "mocha tests/test.js && mocha tests/test.js >> reports/app-report.txt; return 0",
     "api-test": "npm run newman && npm run newman >> reports/api-report.txt",
     "newman": "newman run tests/a2collection.json -e environment.json; return 0;"

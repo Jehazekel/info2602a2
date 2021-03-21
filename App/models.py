@@ -40,13 +40,13 @@ class User(db.Model):
     
 ## Create a Pokemon Model
 class Pokemon(db.Model):
-    pid= db.Column('pid', db.Integer, primary_key=True)
+    pid = db.Column('pid', db.Integer, primary_key=True)
     name= db.Column(db.String(50))
     attack= db.Column(db.Integer)
     defense= db.Column(db.Integer)
     hp= db.Column(db.Float)
     height= db.Column(db.Integer)
-    sp_attacck = db.Column(db.Integer)
+    sp_attack = db.Column(db.Integer)
     sp_defense = db.Column(db.Integer)
     speed= db.Column(db.Integer)
     type1= db.Column(db.String(50))

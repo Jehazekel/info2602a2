@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 db = SQLAlchemy()
 
 class MyPokemon(db.Model):
@@ -7,6 +8,7 @@ class MyPokemon(db.Model):
   pid = db.Column('pid', db.Integer, db.ForeignKey('pokemon.pid'))
   name = db.Column(db.String(50))
   pokemon = db.relationship('Pokemon')
+  pokemon = db.relationship('User')
 
   def toDict(self):
     return{
@@ -42,7 +44,7 @@ class Pokemon(db.Model):
     name= db.Column(db.String(50))
     attack= db.Column(db.Integer)
     defense= db.Column(db.Integer)
-    hp= db.Column(db.Integer)
+    hp= db.Column(db.Float)
     height= db.Column(db.Integer)
     sp_attacck = db.Column(db.Integer)
     sp_defense = db.Column(db.Integer)
@@ -50,4 +52,5 @@ class Pokemon(db.Model):
     type1= db.Column(db.String(50))
     type2= db.Column(db.String(50))
     weight = db.Column(db.Integer)
+    
 

@@ -4,8 +4,8 @@ from flask_jwt import JWT, jwt_required, current_identity
 from sqlalchemy.exc import IntegrityError
 from datetime import timedelta 
 
-from models import db , User, Pokemon, MyPokemon
 
+from models import db, Pokemon, MyPokemon, User
 ''' Begin boilerplate code '''
 def create_app():
   app = Flask(__name__, static_url_path='')
@@ -20,6 +20,7 @@ app = create_app()
 
 app.app_context().push()
 
+
 ''' End Boilerplate Code '''
 
 ''' Set up JWT here '''
@@ -27,9 +28,16 @@ app.app_context().push()
 ''' End JWT Setup '''
 
 # edit to query 50 pokemon objects and send to template
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
-  return render_template('index.html')
+    pokemons= Pokemon.query.all()
+    
+    return render_template('listing.html', pokemons= pokemons)
+
+
+    
+
+
 
 @app.route('/app')
 def client_app():

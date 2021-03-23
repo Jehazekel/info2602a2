@@ -9,9 +9,9 @@ db.create_all(app=app)
 # add code to parse csv, create and save pokemon objects
 with open("App/pokemon.csv", "r") as csv_file:
     data = csv.DictReader(csv_file)
-    allpokemons= []
+    
 
-    id=0
+    
     for pokemon in data:
         
         print(pokemon, "\n\n")   
@@ -37,9 +37,8 @@ with open("App/pokemon.csv", "r") as csv_file:
   
         )
         db.session.add(record)
-        id+=1
-        print(record)
+        
 
-    #allpokemons.append(record)
+    
     db.session.commit() 
 # replace any null values with None to avoid db errors

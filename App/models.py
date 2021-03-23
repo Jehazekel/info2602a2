@@ -8,7 +8,7 @@ class MyPokemon(db.Model):
   pid = db.Column('pid', db.Integer, db.ForeignKey('pokemon.pid'))
   name = db.Column(db.String(50))
   pokemon = db.relationship('Pokemon')
-  pokemon = db.relationship('User')
+  
 
   def toDict(self):
     return{
@@ -53,4 +53,18 @@ class Pokemon(db.Model):
     type2= db.Column(db.String(50))
     weight = db.Column(db.Integer)
     
-
+    def toDict(self):
+        return{
+            'pid':self.pid,
+            'name':self.name,
+            'attack':self.attack,
+            'defense':self.defense,
+            'hp':self.hp,
+            'height':self.height,
+            'sp_attack':self.sp_attack,
+            'sp_defense':self.sp_defense,
+            'speed':self.speed,
+            'type1':self.type1,
+            'type2':self.type2,
+            'weight':self.weight
+        }

@@ -18,17 +18,18 @@
         <td>{{pokemon.name}}</td>
         <td>{{pokemon.type1}}</td>
         <td>{{pokemon.type2}}</td>
-        <td>{% if pokemon.weight=="" %}
-                none
+        {% if pokemon.weight=="" %}
+                <td>none</td>
             {% else %}
-            {{pokemon.weight}}
+            <td>{{pokemon.weight}}</td>
             {%  endif  %}
-        </td>
-        <td>{% if pokemon.height=="" %}
-                none
+        
+        {% if pokemon.height=="" %}
+            <td>none</td>
+            
             {% else %}
-            {{pokemon.height}}
-            {%  endif  %}</td>
+            <td>{{pokemon.height}}</td>
+            {%  endif  %}
     </tr>
     {% endfor%}
 </tbody>

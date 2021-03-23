@@ -25,19 +25,46 @@ app.app_context().push()
 
 ''' Set up JWT here '''
 
+def authenticate(uname, password):
+  #search for the specified user
+  user = User.query.filter_by(username=uname).first()
+  #if user is found and password matches
+  if user and user.check_password(password):
+    return user
+
+#Payload is a dictionary which is passed to the function by Flask JWT
+def identity(payload):
+  return User.query.get(payload['identity'])
+
+jwt = JWT(app, authenticate, identity)
+
 ''' End JWT Setup '''
 
 # edit to query 50 pokemon objects and send to template
 @app.route('/', methods=['GET'])
 def index():
-    pokemons= Pokemon.query.all()
-    
+    pokemons= Pokemon.query.offset(0).limit(50).all()
     return render_template('listing.html', pokemons= pokemons)
 
 
-    
+@ app.route('/pokemon', methods=['GET'])
+def pokemon_listing():
+    pokemons= Pokemon.query.all()
+    pokemons= [pokemon.toDict() for pokemon in pokemons]
+    return json.dumps(pokemons)
 
-
+@app.route('/signup',methods=['POST'])
+def signup():
+    userdata = request.get_json() # get json data (aka submitted username, email & password)
+    newuser = User(username=userdata['username'], email=userdata['email']) # create user object
+    newuser.set_password(userdata['password']) # set password
+    try:
+        db.session.add(newuser)
+        db.session.commit() # save user
+    except IntegrityError: # attempted to insert a duplicate user
+        db.session.rollback()
+        return 'username or email already exists' # error message
+    return 'user created' # success
 
 @app.route('/app')
 def client_app():

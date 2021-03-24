@@ -50,8 +50,8 @@ def index():
 @ app.route('/pokemon', methods=['GET'])
 def pokemon_listing():
     pokemons= Pokemon.query.all()
-    pokemons= [pokemon.toDict() for pokemon in pokemons]
-    return json.dumps(pokemons)
+    pokemons= [pokemon.toDict() for pokemon in pokemons]            
+    return json.dumps(pokemons) 
 
 @app.route('/signup',methods=['POST'])
 def signup():

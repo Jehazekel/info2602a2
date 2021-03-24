@@ -45,13 +45,13 @@ class Pokemon(db.Model):
     attack= db.Column(db.Integer)
     defense= db.Column(db.Integer)
     hp= db.Column(db.Float)
-    height= db.Column(db.Integer)
+    height= db.Column(db.Integer, nullable=True)
     sp_attack = db.Column(db.Integer)
     sp_defense = db.Column(db.Integer)
     speed= db.Column(db.Integer)
     type1= db.Column(db.String(50))
-    type2= db.Column(db.String(50))
-    weight = db.Column(db.Integer)
+    type2= db.Column(db.String(50), nullable=True)
+    weight = db.Column(db.Integer, nullable=True)
     
     def toDict(self):
         return{

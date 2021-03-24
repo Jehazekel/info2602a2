@@ -20,7 +20,7 @@ before(async function(){
 });
 
 function getInnerText(selector){
-  return page.evaluate(selector=>document.querySelector(selector).innerText, selector);
+  return page.evaluate(selector=>document.querySelector(selector).innerText.trim(), selector);
 }
 
 
@@ -42,7 +42,7 @@ describe('Test Suite 1: The Pokelisting Table', ()=>{
   })
 
   it('Should have "bulbasaur" in first column of the first row', async()=>{
-      expect(await getInnerText('tr:nth-child(1) > td:nth-child(1)')).to.eql('Bulbasaur')
+      expect((await getInnerText('tr:nth-child(1) > td:nth-child(1)'))).to.eql('Bulbasaur')
   });
 
    it('Should have "grass" in first column of the first row', async()=>{

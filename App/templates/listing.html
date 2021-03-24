@@ -5,26 +5,37 @@
 {{super()}}
 
 {% block content %}
-<tbody>
-    <thead>        
+
+<thead>
+    <tr>        
     <th>Name</th>
     <th>Type1</th>
     <th>Type2</th>
     <th>Weight</th>
     <th>Height</th>
-    </thead>
+    </tr>
+</thead>
+<tbody>
     {% for pokemon in pokemons%}
     <tr>
         <td>{{pokemon.name}}</td>
         <td>{{pokemon.type1}}</td>
+
+        {% if pokemon.type2=='' %}
+        <td>none</td>
+        {% else %}
         <td>{{pokemon.type2}}</td>
-        {% if pokemon.weight=="" %}
+        {%  endif  %}
+
+
+        {% if pokemon.weight=='' %}
                 <td>none</td>
             {% else %}
             <td>{{pokemon.weight}}</td>
             {%  endif  %}
         
-        {% if pokemon.height=="" %}
+
+        {% if pokemon.height=='' %}
             <td>none</td>
             
             {% else %}

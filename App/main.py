@@ -66,6 +66,9 @@ def signup():
         return 'username or email already exists' # error message
     return 'user created' # success
 
+
+
+
 @app.route('/app')
 def client_app():
   return app.send_static_file('app.html')

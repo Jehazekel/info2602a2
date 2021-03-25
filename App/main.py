@@ -49,13 +49,13 @@ def index():
     pokemons= Pokemon.query.offset(0).limit(50).all()
     return render_template('listing.html', pokemons= pokemons)
 
-
+#list all pokemon
 @ app.route('/pokemon', methods=['GET'])
 def pokemon_listing():
     pokemons= Pokemon.query.all()
     pokemons= [pokemon.toDict() for pokemon in pokemons]            
     return json.dumps(pokemons) 
-
+#signup a user: from data passed
 @app.route('/signup',methods=['POST'])
 def signup():
     userdata = request.get_json() # get json data (aka submitted username, email & password)
@@ -69,7 +69,7 @@ def signup():
         return 'username or email already exists' # error message
     return 'user created' # success
 
-
+#Add a pokemon to a user
 @app.route('/mypokemon', methods=["POST"])
 @jwt_required()
 def save_mypokemon():
@@ -84,7 +84,7 @@ def save_mypokemon():
         return data['name'] + " captured"
     return "No Pokemon captured!"
 
-
+#get the pokemons of the currently logged in user
 @app.route('/mypokemon', methods=["GET"])
 @jwt_required()
 def list_mypokemon():
@@ -97,7 +97,7 @@ def list_mypokemon():
         return json.dumps( user_pokemons )
     return "No Pokemon captured!"
 
-
+#Gets the current users nth pokemon
 @app.route('/mypokemon/<user_nth_pokemon>', methods=["GET"])
 @jwt_required()
 def get_mypokemon(user_nth_pokemon):
@@ -113,7 +113,7 @@ def get_mypokemon(user_nth_pokemon):
     return "No Pokemon captured!"
 
 
-#Allows a user to rename their pokemon
+#Allows a user to rename their nth pokemon
 @app.route('/mypokemon/<user_nth_pokemon>', methods=["PUT"])
 @jwt_required()
 def update_mypokemon(user_nth_pokemon):
@@ -134,7 +134,7 @@ def update_mypokemon(user_nth_pokemon):
     return "Invalid User!"
 
 
-#Allows a user to release their pokemon
+#Allows a user to release(a.k.a delete) their pokemon
 @app.route('/mypokemon/<user_nth_pokemon>', methods=["DELETE"])
 @jwt_required()
 def delete_mypokemon(user_nth_pokemon):
